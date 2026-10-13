@@ -1,0 +1,10 @@
+[console_scripts]
+analyze_depth = huanpan_perception.analyze_depth:main
+capture_node = huanpan_perception.capture_node:main
+detect_images = huanpan_perception.detect_cli:main
+detector_node = huanpan_perception.detector_node:main
+evaluate_detector = huanpan_perception.eval_cli:main
+extract_frames = huanpan_perception.extract_cli:main
+fake_camera_node = huanpan_perception.fake_camera_node:main
+label_dataset = huanpan_perception.label_cli:main
+train_detector = huanpan_perception.train_cli:main

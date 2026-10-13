@@ -1,0 +1,135 @@
+<mujocoinclude>
+  <!--
+    DH Robotics AG95 adapted from dh_ag_95.urdf. The detailed STL meshes are
+    visual-only; compact collision proxies keep contact simulation stable.
+    R1_1_joint is the single commanded joint and the remaining joints are
+    coupled to it by equality constraints in ur5e_with_gripper.xml.
+  -->
+  <body name="gripper_base" pos="0 0.1 0" quat="-0.7071068 0.7071068 0 0">
+    <inertial pos="-0.00022814 0.00015573 0.053456" mass="0.39892"
+      fullinertia="0.00032962 0.00050592 0.00025818 1.7998e-07 -1.1426e-06 -1.8732e-07"/>
+    <geom name="ag95_base_visual" type="mesh" mesh="ag95_base_link" rgba="0.776 0.757 0.737 1"
+      contype="0" conaffinity="0" group="2"/>
+    <geom name="ag95_base_collision" type="box" pos="0 0 0.0655"
+      size="0.0465 0.0335 0.069" rgba="0.35 0.35 0.35 0.18" group="3"/>
+
+    <body name="R1_1_link" pos="0.016 -0.01985 0.10586">
+      <joint name="R1_1_joint" type="hinge" axis="0 1 0" range="-0.94 0"
+        damping="0.2" armature="0.0001"/>
+      <inertial pos="0.0225968468429493 0.0198500598869848 0.0242587750907946"
+        mass="0.0291379998368981"
+        fullinertia="1.02388917540463e-05 5.95906724378469e-06 1.02921693839471e-05 -1.44899147994263e-11 -2.77992390909763e-06 4.68307283448097e-12"/>
+      <geom type="mesh" mesh="ag95_R1_1_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+      <body name="R1_2_link" pos="0.039 0.0111 0.038781">
+        <joint name="R1_2_joint" type="hinge" axis="0 -1 0" range="-1.57 1.57"
+          damping="0.1" armature="0.0001"/>
+        <inertial pos="0.0019102 0.0087499 0.012289" mass="0.025733"
+          fullinertia="2.3006e-06 2.2915e-06 1.5949e-06 3.5018e-12 3.2736e-07 -5.0264e-12"/>
+        <geom type="mesh" mesh="ag95_R1_2_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+        <geom name="ag95_right_fingertip_collision" type="box"
+          pos="0.00932615 0.00875 0.01349824" size="0.01682615 0.0105 0.02650176"
+          rgba="0.15 0.15 0.15 0.2" friction="1.2 0.02 0.002" group="3"/>
+      </body>
+    </body>
+
+    <body name="R2_1_link" pos="0.036673 -0.0025 0.098336">
+      <joint name="R2_1_joint" type="hinge" axis="0 1 0" range="-1.57 1.57"
+        damping="0.1" armature="0.0001"/>
+      <inertial pos="0.023891 0.0025003 0.023744" mass="0.016485"
+        fullinertia="1.3639e-06 2.3531e-06 1.3805e-06 -2.7312e-10 -1.0272e-06 -1.3532e-10"/>
+      <geom type="mesh" mesh="ag95_R2_1_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+    </body>
+
+    <body name="M_link" pos="0 0 0.055898">
+      <joint name="M_joint" type="slide" axis="0 0 1" range="0 0.0301"
+        damping="1" armature="0.001"/>
+      <inertial pos="-3.8966733e-08 -1.9784389e-09 0.0055244612" mass="0.0424523662"
+        fullinertia="9.0909798e-06 1.7486057e-05 1.7705523e-05 -2.7372247e-12 1.3664826e-11 1.4611613e-12"/>
+      <geom type="mesh" mesh="ag95_M_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+
+      <body name="MR_link" pos="0.02135 -0.005 -0.00154">
+        <joint name="MR_joint" type="hinge" axis="0 -1 0" range="-1.57 1.57"
+          damping="0.1" armature="0.0001"/>
+        <inertial pos="0.0194173453 0.0050002082 0.0198267984" mass="0.0225325602"
+          fullinertia="3.1604708e-06 2.7456458e-06 2.6234135e-06 -7.5731410e-11 -1.0470445e-06 -3.1650341e-10"/>
+        <geom type="mesh" mesh="ag95_MR_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+        <body name="MR_1_1_link" pos="0.0240535019 -0.01485 0.0290426092">
+          <joint name="MR_1_1_joint" type="hinge" axis="0 1 0" range="-1.57 1.57"
+            damping="0.1" armature="0.0001"/>
+          <inertial pos="-0.0147446718 0.0198500045 0.0096570742" mass="0.0039541047"
+            fullinertia="1.3814441e-06 6.8389350e-07 1.5386486e-06 -5.9360723e-14 2.9645455e-07 9.0896788e-14"/>
+          <geom type="mesh" mesh="ag95_MR_1_1_link" rgba="0.204 0.204 0.204 1" contype="0" conaffinity="0" group="2"/>
+        </body>
+        <body name="MR_2_1_link" pos="0.0240535019 -0.0093 0.0290426092">
+          <joint name="MR_2_1_joint" type="hinge" axis="0 1 0" range="-1.57 1.57"
+            damping="0.1" armature="0.0001"/>
+          <inertial pos="0.0122815484 0.0143000664 0.0298476338" mass="0.0260748936"
+            fullinertia="8.7747462e-06 6.9915193e-06 3.6007024e-06 -1.4665747e-11 -2.1032649e-06 4.4852274e-12"/>
+          <geom type="mesh" mesh="ag95_MR_2_1_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+        </body>
+      </body>
+
+      <body name="ML_link" pos="-0.02135 -0.005 -0.00154" quat="0 0 0 1">
+        <joint name="ML_joint" type="hinge" axis="0 -1 0" range="-1.57 1.57"
+          damping="0.1" armature="0.0001"/>
+        <inertial pos="0.0194202112 -0.0050002081 0.0198267984" mass="0.0225325602"
+          fullinertia="3.1604708e-06 2.7456458e-06 2.6234135e-06 -7.5731410e-11 -1.0470636e-06 3.1648836e-10"/>
+        <geom type="mesh" mesh="ag95_ML_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+        <body name="ML_1_1_link" pos="0.0240535019 0.01485 0.0290426092">
+          <joint name="ML_1_1_joint" type="hinge" axis="0 1 0" range="-1.57 1.57"
+            damping="0.1" armature="0.0001"/>
+          <inertial pos="-0.0147446718 -0.0198499955 0.0096570742" mass="0.0039541047"
+            fullinertia="1.3814441e-06 6.8389350e-07 1.5386486e-06 -5.9360723e-14 2.9645455e-07 9.0896788e-14"/>
+          <geom type="mesh" mesh="ag95_ML_1_1_link" rgba="0.204 0.204 0.204 1" contype="0" conaffinity="0" group="2"/>
+        </body>
+        <body name="ML_2_1_link" pos="0.0240535019 0.0093 0.0290426092">
+          <joint name="ML_2_1_joint" type="hinge" axis="0 1 0" range="-1.57 1.57"
+            damping="0.1" armature="0.0001"/>
+          <inertial pos="0.0122817499 -0.0143000665 0.0298476328" mass="0.0260748936"
+            fullinertia="8.7747457e-06 6.9915193e-06 3.6007030e-06 -1.4706893e-11 -2.1033212e-06 -4.3841184e-12"/>
+          <geom type="mesh" mesh="ag95_ML_2_1_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+        </body>
+      </body>
+    </body>
+
+    <body name="L1_1_link" pos="-0.016 -0.01985 0.10586" quat="-0.0000036732 0 0 1">
+      <joint name="L1_1_joint" type="hinge" axis="0 1 0" range="-1.57 1.57"
+        damping="0.1" armature="0.0001"/>
+      <inertial pos="0.0225970322 -0.0198500590 0.0242587751" mass="0.0291379998"
+        fullinertia="1.0238892e-05 5.9590672e-06 1.0292169e-05 -1.4489915e-11 -2.7799800e-06 -4.3212100e-12"/>
+      <geom type="mesh" mesh="ag95_L1_1_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+      <body name="L1_2_link" pos="0.039 -0.0111 0.038781">
+        <joint name="L1_2_joint" type="hinge" axis="0 -1 0" range="-1.57 1.57"
+          damping="0.1" armature="0.0001"/>
+        <inertial pos="0.0019102 -0.0087501 0.012289" mass="0.025733"
+          fullinertia="2.3006e-06 2.2915e-06 1.5949e-06 3.5018e-12 3.2736e-07 -5.0264e-12"/>
+        <geom type="mesh" mesh="ag95_L1_2_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+        <geom name="ag95_left_fingertip_collision" type="box"
+          pos="0.00932615 -0.00875 0.01349824" size="0.01682615 0.0105 0.02650176"
+          rgba="0.15 0.15 0.15 0.2" friction="1.2 0.02 0.002" group="3"/>
+      </body>
+    </body>
+
+    <body name="L2_1_link" pos="-0.036673 -0.0025 0.098336" quat="-0.0000036732 0 0 1">
+      <joint name="L2_1_joint" type="hinge" axis="0 -1 0" range="-1.57 1.57"
+        damping="0.1" armature="0.0001"/>
+      <!-- The source URDF declares zero mass here; use the mirrored R2_1 inertia. -->
+      <inertial pos="0.023891 -0.0025003 0.023744" mass="0.016485"
+        fullinertia="1.3639e-06 2.3531e-06 1.3805e-06 2.7312e-10 -1.0272e-06 1.3532e-10"/>
+      <geom type="mesh" mesh="ag95_L2_1_link" rgba="0.898 0.918 0.929 1" contype="0" conaffinity="0" group="2"/>
+    </body>
+
+    <site name="gripper_tcp" pos="0 -0.01985 0.200" size="0.006" rgba="1 0.2 0.2 1"/>
+    <body name="carried_drive" pos="0 -0.01985 0.2875">
+      <inertial mass="0.62" pos="0 0 0" diaginertia="0.002099 0.001615 0.000549"/>
+      <!-- 25 x 100 x 175 mm drive proxy. Keep visual and collision groups separate. -->
+      <geom name="carried_drive_visual" type="box" size="0.0125 0.050 0.0875"
+        material="drive_target" contype="0" conaffinity="0" group="2"/>
+      <geom name="carried_drive_collision" type="box" size="0.0125 0.050 0.0875"
+        rgba="0.72 0.18 0.10 0.18" friction="0.8 0.02 0.002" group="3"/>
+      <geom name="carried_drive_bezel" type="box" size="0.0125 0.050 0.0015"
+        pos="0 0 0.086" material="drive_target_bezel" contype="0" conaffinity="0" group="2"/>
+      <site name="drive_tip" pos="0 0 0.0875" size="0.005" rgba="1 0.8 0.1 1"/>
+    </body>
+  </body>
+</mujocoinclude>

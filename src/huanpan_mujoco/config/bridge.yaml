@@ -1,0 +1,24 @@
+mujoco_bridge:
+  ros__parameters:
+    show_viewer: true
+    simulation_rate: 100.0
+    joint_state_rate: 50.0
+    # Counteract the UR5e, AG95 and carried-drive gravity load before adding
+    # the reproducible disturbance torque.
+    gravity_compensation_enabled: true
+    # Reproducible colored joint-torque disturbance. Keep disabled for baseline runs.
+    disturbance_enabled: false
+    disturbance_seed: 7
+    disturbance_scale: 1.0
+    disturbance_correlation_time_s: 0.25
+    disturbance_torque_stddev_nm: [0.8, 0.8, 0.5, 0.12, 0.12, 0.08]
+    disturbance_torque_limit_nm: [2.4, 2.4, 1.5, 0.36, 0.36, 0.24]
+    # Insertion force guard. The 25 N value is a simulation starting point,
+    # not a validated limit for a physical drive or server backplane.
+    force_guard_enabled: false
+    force_guard_threshold_n: 25.0
+    force_guard_release_n: 15.0
+    force_guard_trip_duration_s: 0.03
+    force_filter_time_constant_s: 0.02
+    force_guard_retreat_lookback_s: 0.25
+    force_guard_retreat_duration_s: 0.50

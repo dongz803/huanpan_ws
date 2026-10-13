@@ -1,0 +1,20 @@
+insertion_demo:
+  ros__parameters:
+    mode: nominal
+    planning_group: ur_manipulator
+    end_effector_link: drive_tip
+    reference_frame: world
+    server_wait_seconds: 10.0
+    planning_time: 10.0
+    planning_attempts: 5
+    velocity_scaling: 0.10
+    acceleration_scaling: 0.10
+    cartesian_eef_step: 0.002
+    cartesian_jump_threshold: 0.0
+    minimum_cartesian_fraction: 0.995
+    entry_position: [0.6050, 0.0525, 0.7225]
+    goal_position: [0.7875, 0.0525, 0.7225]
+    orientation_xyzw: [0.70710678, 0.0, 0.70710678, 0.0]
+    # overforce mode intentionally offsets the insertion laterally in simulation.
+    fault_lateral_offset_m: 0.004
+    expected_force_threshold_n: 25.0

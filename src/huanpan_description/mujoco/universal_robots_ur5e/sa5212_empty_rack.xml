@@ -1,0 +1,115 @@
+<mujocoinclude>
+  <!--
+    Simplified 12-bay hard-drive rack using the measured workcell envelope.
+
+    Envelope: 430 mm (W) x 85 mm (H) x 175 mm (D).
+    Layout: four bays horizontally and three bays vertically.
+    Drive envelope: 100 mm (W) x 25 mm (H) x 175 mm (D).
+
+    Axes: +x points into the rack, +y points to the viewer's left when
+    looking at the front, and +z points upward. The front plane is x=-0.0875.
+  -->
+  <body name="sa5212_chassis" pos="0.7075 0 0.750">
+    <!-- Generic floor stand for the simulated workcell; not part of the rack. -->
+    <geom name="rack_stand_left" type="box" size="0.018 0.018 0.375"
+      pos="-0.0875 0.235 -0.375" material="rack_panel"/>
+    <geom name="rack_stand_right" type="box" size="0.018 0.018 0.375"
+      pos="-0.0875 -0.235 -0.375" material="rack_panel"/>
+    <geom name="rack_stand_foot" type="box" size="0.035 0.253 0.012"
+      pos="-0.0875 0 -0.738" material="rack_panel"/>
+
+    <!-- Measured rack shell: 0.430 W x 0.085 H x 0.175 D. -->
+    <geom name="sa5212_top" type="box" size="0.0875 0.215 0.001"
+      pos="0 0 0.0415" material="rack_frame"/>
+    <geom name="sa5212_bottom" type="box" size="0.0875 0.215 0.001"
+      pos="0 0 -0.0415" material="rack_frame"/>
+    <geom name="sa5212_left_side" type="box" size="0.0875 0.001 0.0425"
+      pos="0 0.214 0" material="rack_frame"/>
+    <geom name="sa5212_right_side" type="box" size="0.0875 0.001 0.0425"
+      pos="0 -0.214 0" material="rack_frame"/>
+    <geom name="sa5212_rear" type="box" size="0.003 0.215 0.0425"
+      pos="0.0845 0 0" material="rack_frame"/>
+
+    <!-- Twelve empty openings: four columns by three rows. -->
+    <geom name="drive_bay_00_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 0.1575 0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_01_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 0.0525 0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_02_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 -0.0525 0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_03_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 -0.1575 0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_04_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 0.1575 0" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_05_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 0.0525 0" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_06_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 -0.0525 0" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_07_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 -0.1575 0" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_08_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 0.1575 -0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_09_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 0.0525 -0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_10_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 -0.0525 -0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+    <geom name="drive_bay_11_recess" type="box" size="0.003 0.050 0.0125"
+      pos="-0.085 -0.1575 -0.0275" material="bay_void" contype="0" conaffinity="0" group="2"/>
+
+    <!-- Front grid. The openings remain collision-free for insertion. -->
+    <geom name="bay_grid_left" type="box" size="0.001 0.001 0.0425"
+      pos="-0.0865 0.214 0" material="rack_trim"/>
+    <geom name="bay_grid_col_1" type="box" size="0.001 0.001 0.0425"
+      pos="-0.0865 0.105 0" material="rack_trim"/>
+    <geom name="bay_grid_col_2" type="box" size="0.001 0.001 0.0425"
+      pos="-0.0865 0 0" material="rack_trim"/>
+    <geom name="bay_grid_col_3" type="box" size="0.001 0.001 0.0425"
+      pos="-0.0865 -0.105 0" material="rack_trim"/>
+    <geom name="bay_grid_right" type="box" size="0.001 0.001 0.0425"
+      pos="-0.0865 -0.214 0" material="rack_trim"/>
+    <geom name="bay_grid_top" type="box" size="0.001 0.214 0.001"
+      pos="-0.0865 0 0.0415" material="rack_trim"/>
+    <geom name="bay_grid_row_1" type="box" size="0.001 0.214 0.0005"
+      pos="-0.0865 0 0.01375" material="rack_trim"/>
+    <geom name="bay_grid_row_2" type="box" size="0.001 0.214 0.0005"
+      pos="-0.0865 0 -0.01375" material="rack_trim"/>
+    <geom name="bay_grid_bottom" type="box" size="0.001 0.214 0.001"
+      pos="-0.0865 0 -0.0415" material="rack_trim"/>
+
+    <!--
+      Slot reference frames for all twelve bays: +x is the insertion direction.
+
+      Entry is 15 mm in front of the front plane (x = -0.0865), goal is fully
+      seated. Index = row * 4 + column, rows top to bottom, columns left to
+      right, matching the drive_bay_NN_recess geoms above.
+
+      These are the ground-truth frames that the perception module is expected
+      to recover, and the targets the motion module inserts into.
+    -->
+    <site name="slot_00_entry" pos="-0.1025 0.1575 0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_01_entry" pos="-0.1025 0.0525 0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_02_entry" pos="-0.1025 -0.0525 0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_03_entry" pos="-0.1025 -0.1575 0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_04_entry" pos="-0.1025 0.1575 0" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_05_entry" pos="-0.1025 0.0525 0" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_06_entry" pos="-0.1025 -0.0525 0" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_07_entry" pos="-0.1025 -0.1575 0" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_08_entry" pos="-0.1025 0.1575 -0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_09_entry" pos="-0.1025 0.0525 -0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_10_entry" pos="-0.1025 -0.0525 -0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+    <site name="slot_11_entry" pos="-0.1025 -0.1575 -0.0275" size="0.004" rgba="1 0.75 0.1 1" group="4"/>
+
+    <site name="slot_00_goal" pos="0.080 0.1575 0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_01_goal" pos="0.080 0.0525 0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_02_goal" pos="0.080 -0.0525 0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_03_goal" pos="0.080 -0.1575 0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_04_goal" pos="0.080 0.1575 0" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_05_goal" pos="0.080 0.0525 0" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_06_goal" pos="0.080 -0.0525 0" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_07_goal" pos="0.080 -0.1575 0" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_08_goal" pos="0.080 0.1575 -0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_09_goal" pos="0.080 0.0525 -0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_10_goal" pos="0.080 -0.0525 -0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+    <site name="slot_11_goal" pos="0.080 -0.1575 -0.0275" size="0.004" rgba="0.1 1 0.3 1" group="4"/>
+  </body>
+</mujocoinclude>

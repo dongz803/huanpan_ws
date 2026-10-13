@@ -1,0 +1,10 @@
+insertion:
+  planning_group: ur_manipulator
+  tip_link: drive_tip
+  destination_slot: slot_09
+  entry_frame: slot_09_entry
+  goal_frame: slot_09_goal
+  insertion_axis_in_rack_frame: [1.0, 0.0, 0.0]
+  drive_tip_orientation_xyzw: [0.70710678, 0.0, 0.70710678, 0.0]
+  rack_front_clearance_m: 0.015
+  rear_clearance_m: 0.0015

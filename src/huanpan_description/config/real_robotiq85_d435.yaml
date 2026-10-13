@@ -1,0 +1,31 @@
+# ROS 2 migration manifest for the physical UR5e cell.
+# This profile is deliberately separate from the current AG95 MuJoCo model.
+profile: real_robotiq85_d435
+status: calibration_required
+
+source_assets:
+  legacy_xacro: /home/lzt/robot_driver_ws/src/ur5e/ur_description/urdf/ur5e_all.xacro
+  end_effector: robotiq_2f_85
+  camera: intel_realsense_d435
+
+frames:
+  robot_base: base_link
+  flange: tool0
+  camera_link: camera_link
+  color_optical: camera_color_optical_frame
+  depth_optical: camera_depth_optical_frame
+
+# Historical ROS 1 value: use only as an initial estimate.  The old model has
+# two competing camera chains, so this value is not accepted as production
+# hand-eye calibration until it is remeasured on the final rigid mount.
+initial_tool0_to_camera_link:
+  xyz_m: [0.128, 0.0276853229663415, 0.10553709951342278]
+  rpy_rad: [0.0, 0.0, -0.0008727]
+  production_valid: false
+
+safety:
+  max_visual_servo_translation_step_m: 0.005
+  max_visual_servo_rotation_step_rad: 0.008726646
+  require_fresh_vision: true
+  require_collision_check: true
+  require_force_guard_for_insertion: true

@@ -1,0 +1,40 @@
+<mujoco model="huanpan workcell">
+  <include file="ur5e_with_gripper.xml"/>
+
+  <visual>
+    <headlight diffuse="0.65 0.65 0.65" ambient="0.2 0.2 0.2" specular="0.1 0.1 0.1"/>
+    <rgba haze="0.15 0.22 0.28 1"/>
+    <global azimuth="135" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.25 0.38 0.50" rgb2="0.02 0.03 0.04"
+      width="512" height="3072"/>
+    <texture type="2d" name="workcell_floor" builtin="checker" mark="edge"
+      rgb1="0.23 0.25 0.28" rgb2="0.13 0.15 0.18" markrgb="0.7 0.7 0.7"
+      width="300" height="300"/>
+    <material name="workcell_floor" texture="workcell_floor" texuniform="true" texrepeat="8 8"
+      reflectance="0.08"/>
+    <material name="rack_frame" rgba="0.34 0.36 0.38 1" metallic="0.65" roughness="0.38"/>
+    <material name="rack_panel" rgba="0.10 0.11 0.12 1" metallic="0.35" roughness="0.55"/>
+    <material name="rack_trim" rgba="0.53 0.55 0.57 1" metallic="0.72" roughness="0.32"/>
+    <material name="bay_void" rgba="0.025 0.030 0.035 1" metallic="0.10" roughness="0.82"/>
+    <material name="drive_target" rgba="0.72 0.18 0.10 1" metallic="0.25" roughness="0.45"/>
+    <material name="drive_target_bezel" rgba="0.40 0.055 0.025 1" metallic="0.35" roughness="0.40"/>
+    <material name="status_blue" rgba="0.10 0.55 1.0 1" emission="0.45"/>
+    <material name="status_green" rgba="0.12 0.95 0.30 1" emission="0.65"/>
+  </asset>
+
+  <!-- The AG95 fingertips intentionally overlap the rigidly carried drive proxy. -->
+  <contact>
+    <exclude body1="R1_2_link" body2="carried_drive"/>
+    <exclude body1="L1_2_link" body2="carried_drive"/>
+  </contact>
+
+  <worldbody>
+    <light name="workcell_key" pos="-0.4 -1.2 2.4" dir="0.4 0.5 -1" directional="true"/>
+    <geom name="floor" type="plane" size="0 0 0.05" material="workcell_floor"/>
+
+    <include file="sa5212_empty_rack.xml"/>
+  </worldbody>
+</mujoco>

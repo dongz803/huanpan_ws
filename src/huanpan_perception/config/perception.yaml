@@ -1,0 +1,112 @@
+# huanpan_perception runtime parameters.
+#
+# Load with:
+#   ros2 run huanpan_perception detector_node --ros-args \
+#     --params-file install/huanpan_perception/share/huanpan_perception/config/perception.yaml
+#
+# model_path must point at a detector trained on YOUR captured images. Train one
+# with `train_detector`, then set the path to the best.pt it prints.
+
+huanpan_detector:
+  ros__parameters:
+    # RealSense ROS 2 wrapper default topics (realsense2_camera).
+    image_topic: /camera/camera/color/image_raw
+    detection_topic: detections
+    annotated_topic: detections/image
+
+    model_path: /home/lzt/huanpan_ws/outputs/perception/runs/slot_opening_v1/weights/best.pt
+
+    conf: 0.25
+    iou: 0.5
+    # This model was trained at 640. Capture remains 1280x720; the fine edge
+    # stage uses the original frame. Change to 1280 after retraining at 1280.
+    imgsz: 640
+    device: "0"
+    max_det: 20
+
+    # vision_msgs requires `sudo apt install ros-humble-vision-msgs`.
+    # Use `json` to publish std_msgs/String instead and skip that install.
+    # JSON mode avoids requiring the optional ros-humble-vision-msgs package.
+    # The annotated /detections/image topic is still published normally.
+    output_mode: json
+
+    publish_annotated: true
+    # Only the display topic is reduced. YOLO keeps the original camera frame.
+    annotated_max_width: 640
+    target_class: slot_opening
+    log_every_n_frames: 30
+
+huanpan_capture:
+  ros__parameters:
+    image_topic: /camera/camera/color/image_raw
+    depth_topic: /camera/camera/aligned_depth_to_color/image_raw
+    camera_info_topic: /camera/camera/color/camera_info
+    output_dir: /home/lzt/huanpan_ws/outputs/perception/datasets/rack_grid_v1
+    prefix: capture
+    # auto = interactive when stdin is a terminal, otherwise interval
+    mode: auto
+    interval_s: 1.0
+    max_frames: 300
+    save_depth: false
+    min_interval_s: 0.15
+    sync_slop_s: 0.03
+    sync_queue_size: 15
+
+huanpan_fine_localizer:
+  ros__parameters:
+    image_topic: /camera/camera/color/image_raw
+    depth_topic: /camera/camera/aligned_depth_to_color/image_raw
+    camera_info_topic: /camera/camera/color/camera_info
+    model_path: /home/lzt/huanpan_ws/outputs/perception/runs/slot_opening_v1/weights/best.pt
+    conf: 0.25
+    iou: 0.5
+    imgsz: 640
+    device: "0"
+    max_det: 20
+    target_class: slot_opening
+    target_slot: 0
+    slot_width_m: 0.100
+    slot_height_m: 0.025
+    refinement_mode: edges
+    min_refinement_quality: 0.18
+    max_reprojection_error_px: 2.0
+    max_sync_delta_ms: 30.0
+    translation_tolerance_m: 0.003
+    rotation_tolerance_deg: 1.0
+    # Require several consecutive poses, smooth the last few estimates and
+    # tolerate two short dropouts before declaring the target lost.
+    temporal_window_size: 5
+    tracking_confirm_frames: 3
+    tracking_lost_frames: 3
+    max_translation_jump_m: 0.05
+    max_rotation_jump_deg: 15.0
+    # Depth is a cross-check, not the source of the four slot corners.
+    depth_min_valid_ratio: 0.25
+    depth_min_inlier_ratio: 0.60
+    max_pnp_depth_delta_m: 0.05
+    # Neighbouring drive fronts can sit at another depth. Report the difference
+    # but do not reject RGB/IPPE solely because this optional check disagrees.
+    enforce_pnp_depth_consistency: false
+    # Stage 1: orientation only. The outside depth plane supplies pitch/yaw,
+    # and dominant long edges inside the yellow YOLO ROI supply roll.
+    front_view_enabled: true
+    # Current milestone: evaluate camera orientation only. Even after
+    # FRONT_ALIGNED, do not run or draw the green fine-localization stage.
+    # Set false when beginning the later X/Y centring stage.
+    front_view_only: true
+    require_front_view_alignment: true
+    front_view_window_size: 5
+    front_view_confirm_frames: 5
+    front_view_tilt_tolerance_deg: 5.0
+    front_view_roll_tolerance_deg: 3.0
+    front_view_exit_tilt_deg: 8.0
+    front_view_exit_roll_deg: 5.0
+    front_view_min_line_quality: 0.15
+    front_view_max_plane_rmse_m: 0.010
+    front_view_correction_topic: /huanpan/vision/front_view_correction
+    front_view_aligned_topic: /huanpan/vision/front_view_aligned
+    # Only the debug preview is reduced. Detection/PnP keep the 1280x720 RGB.
+    debug_max_width: 640
+    reference_file: /home/lzt/huanpan_ws/outputs/perception/references/slot_references.yaml
+    sync_queue_size: 15
+    sync_slop_s: 0.03

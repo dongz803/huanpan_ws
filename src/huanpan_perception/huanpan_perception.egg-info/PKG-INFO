@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: huanpan_perception
+Version: 0.1.0
+Summary: YOLO-based rack/slot detection on the real Intel RealSense D435, plus dataset capture, labelling, training and evaluation tooling.
+Maintainer: lzt
+Maintainer-email: lzt@example.com
+License: MIT
+Requires-Dist: setuptools
+Dynamic: license
+Dynamic: maintainer
+Dynamic: maintainer-email
+Dynamic: requires-dist
+Dynamic: summary

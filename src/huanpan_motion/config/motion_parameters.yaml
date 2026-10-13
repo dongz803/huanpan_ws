@@ -1,0 +1,13 @@
+huanpan_motion_node:
+  ros__parameters:
+    planning_group: ur_manipulator
+    end_effector_link: drive_tip
+    controller_action: /ur5e_arm_controller/follow_joint_trajectory
+    server_wait_seconds: 5.0
+    planning_time: 5.0
+    planning_attempts: 3
+    velocity_scaling: 0.20
+    acceleration_scaling: 0.20
+    cartesian_eef_step: 0.002
+    cartesian_jump_threshold: 0.0
+    collision_sampling_stride: 1
