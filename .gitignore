@@ -22,3 +22,4 @@ src/moveit_resources/
 # Downloaded models and incomplete downloads
 weights/
 *.part
+.vscode/
