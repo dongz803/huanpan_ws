@@ -1,6 +1,22 @@
 # huanpan_ws
 
-UR5e 换硬盘机器人的 ROS 2 Humble + MoveIt 2 + MuJoCo 仿真工作区。
+UR5e 换硬盘机器人的 ROS 2 Humble + MoveIt 2 + MuJoCo 仿真与 D435 视觉定位工作区。
+
+## 当前进度（更新于 2026-10-19）
+
+| 模块 | 当前状态 | 说明 |
+|---|---|---|
+| 机器人与场景 | 已完成仿真模型 | UR5e、AG95、固定末端硬盘和 4 x 3 空架已接入 MuJoCo/URDF |
+| 规划与控制 | 已打通仿真链路 | MoveIt 2 可通过 `FollowJointTrajectory` 驱动 MuJoCo |
+| 插入保护 | 已完成仿真原型 | 支持扰动、接触力监测、超限中止和沿历史轨迹回退 |
+| YOLO 粗定位 | 已运行实测 | D435 单槽口黄色框检测，支持 CUDA 推理和低延迟调试图 |
+| 相机正视反馈 | 当前默认阶段 | 面板深度平面负责 pitch/yaw，框内长边负责 roll，只输出旋转修正 |
+| 严格精定位 | 代码已接通，待验收 | 四边精修、四角求交、IPPE/PnP、深度校验和示教比较仍需提升稳定性 |
+| 实机闭环 | 尚未完成 | 还需要腕部相机固定、手眼标定、TF 转换和真实 UR5e 小步闭环 |
+
+当前主线先验证“粗定位后把相机调整到近似正视”。配置中
+`front_view_only: true`，因此默认只显示黄色 YOLO 框和姿态反馈，不显示绿色严格
+精定位框，也不会控制机械臂。已完成、实验中和未完成内容在下文分别说明。
 
 当前已完成：
 
@@ -12,7 +28,9 @@ UR5e 换硬盘机器人的 ROS 2 Humble + MoveIt 2 + MuJoCo 仿真工作区。
 - `drive_tip`、`slot_09_entry` 和 `slot_09_goal` 插入参考坐标系；
 - `/joint_states` 状态发布；
 - MoveIt 兼容的 `FollowJointTrajectory` 机械臂和夹具 Action；
-- MoveIt 2 SRDF、KDL、OMPL、关节限制和控制器配置。
+- MoveIt 2 SRDF、KDL、OMPL、关节限制和控制器配置；
+- D435 RGB、对齐深度和 CameraInfo 同步采集；
+- YOLOv8 单槽口粗定位、相机正视姿态反馈和严格精定位原型。
 
 ## 架构
 
@@ -32,6 +50,18 @@ huanpan_mujoco/mujoco_bridge
 
 MoveIt 2 只负责路径规划和轨迹生成。`mujoco_bridge` 暂时充当仿真控制器；后续改成 `ros2_control` 时，MoveIt 侧的 Action 接口可以保持不变。当前 `ur_manipulator` 的规划末端是硬盘前端 `drive_tip`，而不是夹具中心。
 
+视觉链路与运动链路目前保持解耦：
+
+```text
+D435 RGB-D
+   -> YOLO 黄色槽口框
+   -> 框外面板深度 RANSAC + 框内长边
+   -> 相机 roll/pitch/yaw 修正
+   -> 正视确认
+   -> 四边/四角 + IPPE/PnP（实验阶段）
+   -> 相机坐标系 6D 位姿与示教误差
+```
+
 ## ROS 2 包
 
 ```text
@@ -42,14 +72,16 @@ src/
 ├── huanpan_description/   # URDF、MJCF、夹具、机柜和 RViz 描述
 ├── huanpan_mujoco/        # MuJoCo 仿真与 ROS 2 轨迹桥
 ├── huanpan_motion/        # MoveIt 之上的运动规划与执行封装
-├── huanpan_perception/    # 感知识别：真实 D435 + YOLO 机架/槽位检测
+├── huanpan_perception/    # D435、YOLO、正视反馈与槽口精定位
 └── huanpan_moveit_config/ # MoveIt 2 规划和执行配置
 ```
 
 ## 依赖
 
-系统已有 ROS 2 Humble。MoveIt 2 使用 `humble` 分支源码，和换盘机器人包一起位于
-`/home/lzt/huanpan_ws/src`，不依赖 `ros-humble-moveit` 二进制元包。
+本机使用 ROS 2 Humble。开发环境中的 MoveIt 2 使用 `humble` 分支源码，位于
+`/home/lzt/huanpan_ws/src`，不依赖 `ros-humble-moveit` 二进制元包。为避免把大型
+第三方仓库重复上传，`src/moveit2`、`src/moveit_msgs` 和 `src/moveit_resources`
+不会提交到本仓库；新环境需要自行安装 MoveIt 2 或检出对应 Humble 源码。
 
 本项目没有使用 xacro，URDF 是静态文件。在 MoveIt 安装前，项目内的 `.deps` 提供了一份本地 `control_msgs` 开发回退，足以启动和测试 MuJoCo 轨迹桥。
 
@@ -62,8 +94,8 @@ source .venv/bin/activate
 env -u PYTHONPATH python -m pip install -r requirements.txt
 ```
 
-感知识别使用单独的 `.venv-perception`（CPU 版 torch + ultralytics），
-避免污染已验证的 `.venv`：
+感知识别使用单独的 `.venv-perception`，避免污染已验证的 `.venv`。下面是 CPU
+环境的最小安装方式；RTX 3060 实测使用的是与本机 CUDA 环境匹配的 PyTorch：
 
 ```bash
 cd /home/lzt/huanpan_ws
@@ -204,36 +236,83 @@ ros2 launch huanpan_motion insertion_demo.launch.py mode:=overforce
 
 ## 感知识别模块
 
-`src/huanpan_perception` 在真实 Intel RealSense D435 图像上跑 YOLO，为换盘流程
-提供机架/槽位粗定位。当前阶段只检测**整块机架网格**（1 类 1 框），
-不含手眼标定和 6D 位姿。
+`src/huanpan_perception` 使用 Intel RealSense D435 和单类别 `slot_opening` YOLOv8
+模型检测一个目标槽口。当前默认运行正视姿态反馈；严格精定位代码已能够输出相机
+坐标系下的 6D 位姿，但在偏角、距离和反光变化下仍需继续验证，尚未接入机械臂闭环。
 
 ```text
-D435 → /camera/camera/color/image_raw → detector_node → /detections
+D435 RGB-D + CameraInfo
+  -> YOLO 黄色粗框
+  -> 框外面板深度点 RANSAC 平面法向（pitch/yaw）
+  -> 框内 Canny/Hough 长边方向（roll）
+  -> /huanpan/vision/front_view_correction
+  -> 连续 5 帧满足阈值后 FRONT_ALIGNED
+
+后续严格精定位：
+  -> Sobel 多边线候选 + Huber 直线拟合
+  -> 四线求交得到四角
+  -> 已知槽口尺寸 100 x 25 mm 的 IPPE/PnP
+  -> 外侧面板深度交叉检查 + 时序滤波 + 示教位姿比较
 ```
 
 ```bash
 # 感知环境（ROS 2 + 本工作区 + .venv-perception）
 source scripts/perception_env.sh
 
-# 采集真实图像（手持，按 Enter 存一帧）
-ros2 run huanpan_perception capture_node --ros-args \
-  -p output_dir:=$PWD/outputs/perception/datasets/rack_grid_v1/images \
-  -p mode:=interactive -p save_depth:=true
+# 启动 D435 + 正视反馈/精定位节点
+./scripts/fine_localization_quick.sh
+
+# 查看画面、姿态修正和状态
+ros2 run rqt_image_view rqt_image_view /huanpan/vision/debug_image
+ros2 topic echo /huanpan/vision/front_view_correction
+ros2 topic echo /huanpan/vision/front_view_aligned
+ros2 topic echo /huanpan/vision/status
+```
+
+调试图中黄色 `YOLO` 是粗框，绿色 `FINE` 是严格四边精修结果。当前默认
+`front_view_only: true`，所以只出现黄色框。若要实验性启用严格精定位，可在
+`src/huanpan_perception/config/perception.yaml` 中改为 `false`，重新构建后启动。
+
+采集与训练链路：
+
+```bash
+# SPACE 或 s 保存同步的 RGB、对齐深度、CameraInfo 和帧元数据
+ros2 launch huanpan_perception capture.launch.py \
+  output_dir:=$PWD/outputs/perception/fine_test \
+  prefix:=fineA start_camera:=true save_depth:=true preview:=true
 
 # 标注 → 训练 → 评估 → 运行
 ros2 run huanpan_perception label_dataset \
-  --images outputs/perception/datasets/rack_grid_v1/images
+  --images outputs/perception/datasets/slot_opening_v1/images
 ros2 run huanpan_perception train_detector \
-  --dataset-root outputs/perception/datasets/rack_grid_v1 --epochs 60 --imgsz 640
+  --dataset-root outputs/perception/datasets/slot_opening_v1 --epochs 60 --imgsz 640
 ros2 run huanpan_perception evaluate_detector \
-  --model outputs/perception/runs/rack_grid/weights/best.pt \
-  --dataset-root outputs/perception/datasets/rack_grid_v1
+  --model outputs/perception/runs/slot_opening_v1/weights/best.pt \
+  --dataset-root outputs/perception/datasets/slot_opening_v1
 ros2 launch huanpan_perception perception.launch.py start_camera:=true
 ```
 
+数据集、训练权重、采集图片和运行输出统一放在 `outputs/`，已被 `.gitignore`
+排除，不会上传到公开仓库。克隆仓库后需要自行训练模型，或把 `best.pt` 放到配置中
+指定的位置。
+
 `sudo apt install ros-humble-realsense2-camera ros-humble-vision-msgs` 需要手动执行。
 详细说明、话题接口和已知边界见 `src/huanpan_perception/README.md`。
+
+### 当前视觉阶段的输出
+
+| ROS 2 接口 | 类型 | 含义 |
+|---|---|---|
+| `/huanpan/vision/front_view_correction` | `geometry_msgs/TwistStamped` | 相机光学坐标系下的旋转修正，角量单位 rad，线速度为 0 |
+| `/huanpan/vision/front_view_aligned` | `std_msgs/Bool` | 正视条件是否已连续稳定满足 |
+| `/huanpan/vision/slot_pose` | `geometry_msgs/PoseStamped` | 严格精定位得到的相机系槽口 6D 位姿 |
+| `/huanpan/vision/correction` | `geometry_msgs/TwistStamped` | 当前位姿相对示教参考的 XYZ 和旋转误差 |
+| `/huanpan/vision/aligned` | `std_msgs/Bool` | 是否达到 3 mm / 1 deg 示教误差阈值 |
+| `/huanpan/vision/status` | `std_msgs/String` | 检测、几何质量、深度一致性和耗时 JSON |
+| `/huanpan/vision/debug_image` | `sensor_msgs/Image` | 黄色粗框/绿色精修框及状态可视化 |
+
+这些量目前都在相机坐标系中。接入 UR5e 前必须完成 `tool0 -> camera_link` 手眼
+标定，并通过 TF 把修正量转换到 `base_link`，同时增加单步位移、角度、速度和失效停止限制。
 
 ## 验证
 
@@ -278,14 +357,18 @@ env -u PYTHONPATH MUJOCO_GL=egl .venv/bin/python scripts/render_scene.py \
 
 ## 重要限制
 
-- 感知模块当前只做 2D 检测，没有手眼标定，也还没有输出槽位 6D 位姿；
+- 正视反馈已能输出相机姿态修正，但它是手持视觉验证结果，尚未驱动真实机械臂；
+- 严格精定位能够输出相机系 6D 位姿，但对视距、偏角、反光和角点质量仍敏感，
+  还没有完成 3 mm / 1 deg 重复到位验收；
+- 尚未完成手眼标定和 `camera_color_optical_frame -> base_link` 的 TF 转换；
 - 机架采用用户提供的实测包络 430 x 85 x 175 mm（宽 x 高 x 深），
   SA5212M5 只作为 4 x 3 前面板布局参考，不是原厂 CAD；
 - 任务硬盘为固定末端 link，本阶段没有抓取、释放或 attach/detach 状态切换；
 - AG95 的 STL 在 MuJoCo 中用于高保真显示，接触仍使用简化包围体；
 - `slot_09_entry` 和 `slot_09_inserted` 只证明端点运动学可达且初始无碰撞，
   尚未证明 MoveIt 笛卡尔直线插入、接触稳定性或成功率；
-- 轨迹桥是简化位置控制，未实现 `ros2_control`、路径容差和力控安全监控；
+- 轨迹桥是简化位置控制；已有仿真接触力超限回退，但未实现真实
+  `ros2_control`、完整路径容差或经过实机标定的力控安全策略；
 - 这一版只可用于仿真，不能直接控制真实 UR5e。
 
 UR5e MJCF 来源于 MuJoCo Menagerie，已保留原始 `README.md` 和 BSD-3-Clause `LICENSE`。
