@@ -1,0 +1,13 @@
+{
+  "model": "outputs/perception/runs/slot_opening_v1/weights/best.pt",
+  "split": "val",
+  "images": 16,
+  "gt_instances": 16,
+  "matched_instances": 15,
+  "predicted_instances": 19,
+  "detection_rate": 0.9375,
+  "precision_at_match_iou": 0.7894736842105263,
+  "mean_matched_iou": 0.8671705031815095,
+  "mean_center_error_px": 7.1149776015724715,
+  "p95_center_error_px": 16.71876249862641
+}

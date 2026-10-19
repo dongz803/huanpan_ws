@@ -1,0 +1,21 @@
+{
+  "dataset_root": "outputs/perception/datasets/rack_grid_v1",
+  "images": "",
+  "labels": "",
+  "data": "",
+  "class_names": "slot_opening",
+  "val_ratio": 0.2,
+  "seed": 2,
+  "no_prepare": false,
+  "group_split": "group",
+  "model": "outputs/perception/weights/yolov8n.pt",
+  "epochs": 80,
+  "imgsz": 640,
+  "batch": 8,
+  "workers": 4,
+  "patience": 20,
+  "device": "0",
+  "project": "outputs/perception/runs",
+  "name": "slot_opening_v1",
+  "export_onnx": false
+}

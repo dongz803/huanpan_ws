@@ -1,0 +1,20 @@
+{
+  "images": 16,
+  "valid": 14,
+  "success_rate": 0.875,
+  "mode": "edges",
+  "translation_mean_m": [
+    -0.06817413572788351,
+    -0.02132910966830904,
+    0.25374669768369
+  ],
+  "translation_std_mm": [
+    41.43036579327332,
+    14.413973661201581,
+    61.499353191766225
+  ],
+  "rotation_deviation_deg_mean": 7.842280645751126,
+  "rotation_deviation_deg_max": 24.781177111841068,
+  "reprojection_error_px_mean": 1.3802574709823292,
+  "reprojection_error_px_max": 6.314726365795288
+}

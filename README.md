@@ -292,9 +292,9 @@ ros2 run huanpan_perception evaluate_detector \
 ros2 launch huanpan_perception perception.launch.py start_camera:=true
 ```
 
-数据集、训练权重、采集图片和运行输出统一放在 `outputs/`，已被 `.gitignore`
-排除，不会上传到公开仓库。克隆仓库后需要自行训练模型，或把 `best.pt` 放到配置中
-指定的位置。
+数据集、采集图片和临时运行输出统一放在 `outputs/`，默认被 `.gitignore` 排除。
+仓库仅通过白名单保留经过检查的 `best.pt`、训练指标、精定位 JSON 和力控曲线，
+内容及边界见 `outputs/README.md`。公开仓库不包含原始 RGB/深度数据。
 
 `sudo apt install ros-humble-realsense2-camera ros-humble-vision-msgs` 需要手动执行。
 详细说明、话题接口和已知边界见 `src/huanpan_perception/README.md`。

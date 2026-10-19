@@ -1,0 +1,462 @@
+[
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/001_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 4.14px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/004_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.9175732731819153,
+    "bbox_xyxy": [
+      115.24322509765625,
+      102.54522705078125,
+      512.7430419921875,
+      299.8547668457031
+    ],
+    "corners": [
+      [
+        101.29470211217537,
+        154.06824382142355
+      ],
+      [
+        508.0753881453964,
+        154.00123354504024
+      ],
+      [
+        507.95338173666676,
+        262.2511779911843
+      ],
+      [
+        101.84098264118707,
+        259.8075741509612
+      ]
+    ],
+    "refinement_quality": 0.23958333333333334,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.0818835215328354,
+      -0.034539790540371575,
+      0.2161369081742804
+    ],
+    "quaternion_xyzw": [
+      0.022000134097313762,
+      0.05210955855696237,
+      0.008555279698900943,
+      0.9983623566601318
+    ],
+    "reprojection_error_px": 0.74582490197736
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/005_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.9060584306716919,
+    "bbox_xyxy": [
+      205.85845947265625,
+      239.25445556640625,
+      518.0836181640625,
+      318.01641845703125
+    ],
+    "corners": [
+      [
+        215.87211824323512,
+        233.02961734901402
+      ],
+      [
+        518.0525605518533,
+        232.99112769275757
+      ],
+      [
+        517.9856795839444,
+        309.52450121251036
+      ],
+      [
+        219.08270191584305,
+        308.844768532551
+      ]
+    ],
+    "refinement_quality": 0.4395834604899089,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.0926403527446709,
+      -0.027458795295026095,
+      0.30287196746750406
+    ],
+    "quaternion_xyzw": [
+      0.03679023122550482,
+      0.01523711113299904,
+      0.0013495020116246956,
+      0.9992059288129825
+    ],
+    "reprojection_error_px": 0.3672616432565401
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/008_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.7440427541732788,
+    "bbox_xyxy": [
+      617.990966796875,
+      272.832275390625,
+      925.335693359375,
+      351.974853515625
+    ],
+    "corners": [
+      [
+        622.7118571954005,
+        277.19582910303035
+      ],
+      [
+        929.3193656128487,
+        278.0219795863008
+      ],
+      [
+        932.9369435943955,
+        351.8976033144709
+      ],
+      [
+        623.0128104615383,
+        353.66392129115604
+      ]
+    ],
+    "refinement_quality": 0.4270833333333333,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      0.041783247151833146,
+      -0.012865463937226998,
+      0.2983684520637453
+    ],
+    "quaternion_xyzw": [
+      -0.09016195555482964,
+      0.0021921664043379548,
+      -0.0004518523022953087,
+      0.9959246015670471
+    ],
+    "reprojection_error_px": 0.7505730028162322
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/012_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 11.86px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/014_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 6.70px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/015_Color.png",
+    "valid": false,
+    "reason": "ValueError: no detection"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/016_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.6335821151733398,
+    "bbox_xyxy": [
+      139.22418212890625,
+      217.94964599609375,
+      744.1727905273438,
+      390.72918701171875
+    ],
+    "corners": [
+      [
+        125.95426099842055,
+        222.3366423420134
+      ],
+      [
+        729.1308104716489,
+        228.55683374630632
+      ],
+      [
+        729.08532775842,
+        377.49955290758504
+      ],
+      [
+        120.01314651010149,
+        373.028470806173
+      ]
+    ],
+    "refinement_quality": 0.8270835876464844,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.03641932502212009,
+      -0.00905220188348401,
+      0.15259994739313207
+    ],
+    "quaternion_xyzw": [
+      -0.02917606960260609,
+      -0.013835073419100508,
+      0.003227399369249672,
+      0.9994733271075038
+    ],
+    "reprojection_error_px": 0.22441833411558676
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/017_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.9136377573013306,
+    "bbox_xyxy": [
+      108.060791015625,
+      255.60958862304688,
+      532.3529052734375,
+      372.6969909667969
+    ],
+    "corners": [
+      [
+        118.72589250683436,
+        265.03539722890963
+      ],
+      [
+        533.0920499375867,
+        263.86050753976787
+      ],
+      [
+        534.505052244033,
+        365.8535004663469
+      ],
+      [
+        118.98936934591939,
+        369.3361543927859
+      ]
+    ],
+    "refinement_quality": 0.7854166030883789,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.07782270922654598,
+      -0.00933688538452833,
+      0.22283893115248982
+    ],
+    "quaternion_xyzw": [
+      0.0028233622213960133,
+      -0.0087442504077871,
+      -0.0031611825986039618,
+      0.9999527857029806
+    ],
+    "reprojection_error_px": 0.5168389409203825
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/018_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 4.08px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/019_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.8834521770477295,
+    "bbox_xyxy": [
+      67.06594848632812,
+      185.82225036621094,
+      380.7442626953125,
+      287.6541748046875
+    ],
+    "corners": [
+      [
+        36.07611236486883,
+        194.18861030092378
+      ],
+      [
+        377.0940103689156,
+        199.36995344340076
+      ],
+      [
+        376.94535079725074,
+        283.3198921047498
+      ],
+      [
+        35.891324491403395,
+        280.5715817386501
+      ]
+    ],
+    "refinement_quality": 0.5208333333333334,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.12985439611220417,
+      -0.03387174504403241,
+      0.27039309250289895
+    ],
+    "quaternion_xyzw": [
+      0.009410169852706447,
+      -0.0033788517473598736,
+      0.005434171368493182,
+      0.999935248826518
+    ],
+    "reprojection_error_px": 0.5744022366849131
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/020_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.9154573678970337,
+    "bbox_xyxy": [
+      284.6373291015625,
+      229.5225372314453,
+      682.09521484375,
+      342.58587646484375
+    ],
+    "corners": [
+      [
+        263.98212365350105,
+        231.9285213619278
+      ],
+      [
+        677.278582582251,
+        233.43897214368016
+      ],
+      [
+        676.8934025236082,
+        336.272968084938
+      ],
+      [
+        264.0467163791974,
+        335.91645874426234
+      ]
+    ],
+    "refinement_quality": 0.4520832697550456,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.043010089482385064,
+      -0.0169637685448209,
+      0.22230256113378755
+    ],
+    "quaternion_xyzw": [
+      0.002713742008964397,
+      0.0025586631553946894,
+      0.0013160465947596556,
+      0.9999921784036746
+    ],
+    "reprojection_error_px": 0.35124288555586397
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/022_Color.png",
+    "valid": false,
+    "reason": "ValueError: no edge quadrilateral reaches quality 0.18"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/024_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.8813675045967102,
+    "bbox_xyxy": [
+      200.64349365234375,
+      169.50875854492188,
+      478.16497802734375,
+      247.25912475585938
+    ],
+    "corners": [
+      [
+        200.98479752469675,
+        174.98803666854923
+      ],
+      [
+        482.7170932511033,
+        175.30597484960526
+      ],
+      [
+        483.0249002798805,
+        245.97630871077084
+      ],
+      [
+        201.0671783331921,
+        245.99975773381394
+      ]
+    ],
+    "refinement_quality": 0.46875,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.10836064987816346,
+      -0.05091045600620671,
+      0.3250624336199851
+    ],
+    "quaternion_xyzw": [
+      0.007018673624896766,
+      0.004864802519731863,
+      0.0009874694749786661,
+      0.9999630477277784
+    ],
+    "reprojection_error_px": 0.19136676638677239
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/026_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.7114754915237427,
+    "bbox_xyxy": [
+      171.26805114746094,
+      275.1007080078125,
+      459.50634765625,
+      394.734130859375
+    ],
+    "corners": [
+      [
+        175.30485055021106,
+        295.9464458332931
+      ],
+      [
+        463.2138551690791,
+        296.03809328517667
+      ],
+      [
+        464.5817120540171,
+        367.88839623482176
+      ],
+      [
+        178.84769169899954,
+        368.0516183092899
+      ]
+    ],
+    "refinement_quality": 0.4791666666666667,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.11370306030290107,
+      -0.0077770674162215515,
+      0.3186238839861308
+    ],
+    "quaternion_xyzw": [
+      0.04607702467964815,
+      0.007943188123433406,
+      -0.00023606981330723316,
+      0.9989062808042355
+    ],
+    "reprojection_error_px": 0.15625148126309646
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/027_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.8680320382118225,
+    "bbox_xyxy": [
+      342.61090087890625,
+      185.14825439453125,
+      588.2224731445312,
+      273.91455078125
+    ],
+    "corners": [
+      [
+        345.2779152456332,
+        202.17309294341106
+      ],
+      [
+        610.9941133305929,
+        198.79864310831988
+      ],
+      [
+        613.4029973624154,
+        263.5641356117899
+      ],
+      [
+        347.93253971707287,
+        268.67883940768496
+      ]
+    ],
+    "refinement_quality": 0.20833333333333334,
+    "refinement_method": "gradient_lines_multi",
+    "translation_m": [
+      -0.06337692513423772,
+      -0.04637368143764127,
+      0.3515633778473173
+    ],
+    "quaternion_xyzw": [
+      0.01793416286083064,
+      -0.08124408299450729,
+      -0.017359535479224555,
+      0.9963816594602735
+    ],
+    "reprojection_error_px": 0.348861545348737
+  }
+]

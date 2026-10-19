@@ -6,7 +6,31 @@ install/
 log/
 __pycache__/
 *.py[cod]
-outputs/
+# Runtime outputs are ignored by default. A small, reviewed allowlist of
+# reproducible experiment artifacts is kept below.
+/outputs/**
+!/outputs/README.md
+!/outputs/force_traces/
+!/outputs/force_traces/*.csv
+!/outputs/perception/
+!/outputs/perception/eval/
+!/outputs/perception/eval/slot_opening_v1/
+!/outputs/perception/eval/slot_opening_v1/metrics.json
+!/outputs/perception/fine_localization/
+!/outputs/perception/fine_localization/*/
+!/outputs/perception/fine_localization/*/summary.json
+!/outputs/perception/fine_localization/*/results.json
+!/outputs/perception/runs/
+!/outputs/perception/runs/slot_opening_v1/
+!/outputs/perception/runs/slot_opening_v1/args.yaml
+!/outputs/perception/runs/slot_opening_v1/train_invocation.json
+!/outputs/perception/runs/slot_opening_v1/results.csv
+!/outputs/perception/runs/slot_opening_v1/results.png
+!/outputs/perception/runs/slot_opening_v1/labels.jpg
+!/outputs/perception/runs/slot_opening_v1/Box*_curve.png
+!/outputs/perception/runs/slot_opening_v1/confusion_matrix*.png
+!/outputs/perception/runs/slot_opening_v1/weights/
+!/outputs/perception/runs/slot_opening_v1/weights/best.pt
 .pytest_cache/
 # Third-party source repositories
 src/moveit2/
@@ -20,6 +44,6 @@ src/moveit_resources/
 .firecrawl/
 
 # Downloaded models and incomplete downloads
-weights/
+/weights/
 *.part
 .vscode/

@@ -1,0 +1,158 @@
+[
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/001_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 4.46px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/004_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 14.75px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/005_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 4.22px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/008_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 2.35px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/012_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 17.32px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/014_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 19.59px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/015_Color.png",
+    "valid": false,
+    "reason": "ValueError: no detection"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/016_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 2.76px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/017_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.9136377573013306,
+    "bbox_xyxy": [
+      108.060791015625,
+      255.60958862304688,
+      532.3529052734375,
+      372.6969909667969
+    ],
+    "corners": [
+      [
+        118.71791451039977,
+        261.8772028628752
+      ],
+      [
+        533.0671899038153,
+        262.06606655618106
+      ],
+      [
+        534.4777350744109,
+        363.88169909326064
+      ],
+      [
+        118.97596558270361,
+        364.0300991922312
+      ]
+    ],
+    "refinement_quality": 1.0,
+    "refinement_method": "gradient_lines",
+    "translation_m": [
+      -0.07832597917787722,
+      -0.010187179503736923,
+      0.2254849133466496
+    ],
+    "quaternion_xyzw": [
+      0.009735336287789638,
+      -0.02770057801011413,
+      -0.00095967274595611,
+      0.9995683969761598
+    ],
+    "reprojection_error_px": 0.749393778509463
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/018_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 4.56px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/019_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 2.73px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/020_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 3.05px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/022_Color.png",
+    "valid": false,
+    "reason": "ValueError: edge quality 0.18 < 0.18"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/024_Color.png",
+    "valid": true,
+    "coarse_confidence": 0.8813675045967102,
+    "bbox_xyxy": [
+      200.64349365234375,
+      169.50875854492188,
+      478.16497802734375,
+      247.25912475585938
+    ],
+    "corners": [
+      [
+        214.60460276628402,
+        175.00340677758723
+      ],
+      [
+        478.3569810737538,
+        175.3010544121691
+      ],
+      [
+        480.8758825117859,
+        232.9918726086011
+      ],
+      [
+        216.1917442919455,
+        233.02117281887487
+      ]
+    ],
+    "refinement_quality": 0.875,
+    "refinement_method": "gradient_lines",
+    "translation_m": [
+      -0.1175602144459196,
+      -0.05990912784413669,
+      0.3653775702402563
+    ],
+    "quaternion_xyzw": [
+      -0.13370421318062328,
+      -0.1327449409863077,
+      -0.04045465607039361,
+      0.9812570431963882
+    ],
+    "reprojection_error_px": 1.3202870416936472
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/026_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 2.58px exceeds 2.00px"
+  },
+  {
+    "image": "outputs/perception/datasets/rack_grid_v1/data/images/val/027_Color.png",
+    "valid": false,
+    "reason": "ValueError: reprojection error 2.97px exceeds 2.00px"
+  }
+]
